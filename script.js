@@ -18,6 +18,11 @@
     let canvas = null;
     let photo = null;
     let startButton = null;
+    let photo1 = null;
+    let photo2 = null;
+    let photo3 = null;
+    let printButton = null;
+    let photoCount = 0;
   
     function showViewLiveResultButton() {
       if (window.self !== window.top) {
@@ -42,6 +47,10 @@
       canvas = document.getElementById("canvas");
       photo = document.getElementById("photo");
       startButton = document.getElementById("start-button");
+      photo1 = document.getElementById("photo1");
+      photo2 = document.getElementById("photo2");
+      photo3 = document.getElementById("photo3");
+      printButton = document.getElementById("print-button");
   
       navigator.mediaDevices
         .getUserMedia({ video: true, audio: false })
@@ -85,19 +94,30 @@
         false,
       );
   
-      clearPhoto();
+      printButton.addEventListener(
+        "click",
+        (ev) => {
+          printPhotoStrip();
+          ev.preventDefault();
+        },
+        false,
+      );
+  
+      clearPhotos();
     }
   
     // Fill the photo with an indication that none has been
     // captured.
   
-    function clearPhoto() {
+    function clearPhotos() {
       const context = canvas.getContext("2d");
       context.fillStyle = "#AAA";
       context.fillRect(0, 0, canvas.width, canvas.height);
   
       const data = canvas.toDataURL("image/png");
-      photo.setAttribute("src", data);
+      photo1.setAttribute("src", data);
+      photo2.setAttribute("src", data);
+      photo3.setAttribute("src", data);
     }
   
     // Capture a photo by fetching the current contents of the video
@@ -114,10 +134,25 @@
         context.drawImage(video, 0, 0, width, height);
   
         const data = canvas.toDataURL("image/png");
-        photo.setAttribute("src", data);
+        if (photoCount === 0) {
+          photo1.setAttribute("src", data);
+          photoCount++;
+        } else if (photoCount === 1) {
+          photo2.setAttribute("src", data);
+          photoCount++;
+        } else if (photoCount === 2) {
+          photo3.setAttribute("src", data);
+          video.pause();
+          printButton.style.display = "block";
+        }
       } else {
-        clearPhoto();
+        clearPhotos();
       }
+    }
+  
+    function printPhotoStrip() {
+      // Implement the logic to print the photo strip
+      console.log("Printing photo strip...");
     }
   
     // Set up our event listener to run the startup process
