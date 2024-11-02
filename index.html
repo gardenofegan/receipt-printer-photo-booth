@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo Booth Receipt Printer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="content-area">
+    <h1>MDN - navigator.mediaDevices.getUserMedia(): Still photo capture demo</h1>
+    <p>
+      This example demonstrates how to set up a media stream using your built-in
+      webcam, fetch an image from that stream, and create a PNG using that image.
+    </p>
+    <div class="camera">
+      <video id="video">Video stream not available.</video>
+      <button id="start-button">Take photo</button>
+    </div>
+    <canvas id="canvas"> </canvas>
+    <div class="output">
+      <img id="photo" alt="The screen capture will appear in this box." />
+    </div>
+    <p>
+      Visit our article
+      <a href="https://developer.mozilla.org/en-US/docs/Web/API/Media_Capture_and_Streams_API/Taking_still_photos">
+        Taking still photos with WebRTC</a>
+      to learn more about the technologies used here.
+    </p>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
