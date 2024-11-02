@@ -1,0 +1,1 @@
+# receipt-printer-photo-booth
